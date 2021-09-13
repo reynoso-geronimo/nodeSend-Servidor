@@ -18,6 +18,7 @@ app.use(express.json())
 
 //rutas de la app
 app.use('/api/usuarios',require('./routes/usuarios'));
+app.use('/api/auth',require('./routes/auth'));
 
 
 //arrancar la app
