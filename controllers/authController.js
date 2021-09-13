@@ -2,10 +2,16 @@ const Usuario = require ('../models/Usuario')
 const bcrypt= require ('bcrypt')
 const jwt= require('jsonwebtoken')
 require ('dotenv').config({path:'variables.env'})
+const {validationResult}=  require('express-validator')
 
 exports.autenticarUsuario = async (req,res,next)=>{
     //revisar errores
-
+      //mensajes de error de express validator 
+      const errores= validationResult(req);
+      if(!errores.isEmpty()){
+          return res.status(400).json({errores: errores.array()})
+      }
+  
     //buscar el usuario
     const {email, password}= req.body
     const usuario = await Usuario.findOne({email})
