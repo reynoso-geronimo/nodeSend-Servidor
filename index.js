@@ -1,5 +1,8 @@
 const express = require('express')
 const conectarDB = require('./config/db')
+const cors = require ('cors');
+
+
 
 
 //crear el servidor
@@ -11,12 +14,20 @@ console.log(`comenzando NodeSend`);
 //conectar a la base de datos
 conectarDB()
 
+
+//habilitar cors
+const opcionesCors = {
+    origin:process.env.FRONTEND_URL
+}
+app.use(cors(opcionesCors))
 //p[uerto de la app
 const port = process.env.PORT || 4000;
 
 //habilitar los valores de un body
 
 app.use(express.json())
+
+
 
 //rutas de la app
 app.use('/api/usuarios',require('./routes/usuarios'));
