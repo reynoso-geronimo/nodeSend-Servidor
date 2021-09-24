@@ -23,6 +23,10 @@ app.use(cors(opcionesCors))
 //p[uerto de la app
 const port = process.env.PORT || 4000;
 
+//habilitar carpeta publica
+
+app.use(express.static('uploads'))
+
 //habilitar los valores de un body
 
 app.use(express.json())

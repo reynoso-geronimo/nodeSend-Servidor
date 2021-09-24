@@ -12,11 +12,11 @@ exports.nuevoEnlace = async (req, res, next) => {
 
 
   //crear un objeto enlace
-  const { nombre_original } = req.body;
+  const { nombre_original, nombre } = req.body;
 
   const enlace = new Enlaces();
   enlace.url = shortid.generate();
-  enlace.nombre = shortid.generate();
+  enlace.nombre = nombre;
   enlace.nombre_original = nombre_original;
 
   
@@ -48,6 +48,16 @@ exports.nuevoEnlace = async (req, res, next) => {
   }
 };
 
+//obtener todos los enlaces
+exports.todosEnlaces= async (req,res)=>{
+  try {
+    const enlaces= await Enlaces.find({}).select('url -_id');
+    res.json({enlaces})
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //obtener el enlace
 exports.obtenerEnalce= async (req,res,next)=>{
   const { url }=req.params;
@@ -58,24 +68,7 @@ exports.obtenerEnalce= async (req,res,next)=>{
     return next()
   }
   res.json({archivo:enlace.nombre})
-  const {descargas, nombre} = enlace
-  //si las descargas son iguales a 1 -borrar la entrada y el archivo
-  if(descargas===1){
-   
-
-  
-    //eliminar el archivo
-    req.archivo= nombre
-
-    //eliminar la entrada de la base de datos
-    await Enlaces.findOneAndRemove(req.params.url)
-
-    next()
-  }else{
-    enlace.descargas--;
-    await enlace.save();
-    
-  }
+  next()
   // so descarga >1 descaraga-1
 
 }

@@ -15,9 +15,13 @@ router.post(
   enlacesController.nuevoEnlace
 );
 
+router.get("/",
+  enlacesController.todosEnlaces
+)
+
 router.get("/:url",
      enlacesController.obtenerEnalce,
-     archivosController.eliminarArchivo,
+     
      
      );
 
