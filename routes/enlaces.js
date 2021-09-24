@@ -20,9 +20,17 @@ router.get("/",
 )
 
 router.get("/:url",
+enlacesController.tienePassword,
      enlacesController.obtenerEnalce,
      
      
      );
+router.post("/:url",
+
+  enlacesController.verificarPassword,
+  enlacesController.obtenerEnalce,
+  
+  
+  )
 
 module.exports = router;
