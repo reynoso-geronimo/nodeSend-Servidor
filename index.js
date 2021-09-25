@@ -16,11 +16,13 @@ conectarDB()
 
 
 //habilitar cors
-const opcionesCors = {
+app.use(cors({ credentials: true, origin: true }));
+app.options("*", cors());
+/*const opcionesCors = {
     origin:process.env.FRONTEND_URL
 }
-app.use(cors(opcionesCors))
-//p[uerto de la app
+app.use(cors(opcionesCors))*/
+//puerto de la app
 const port = process.env.PORT || 4000;
 
 //habilitar carpeta publica
