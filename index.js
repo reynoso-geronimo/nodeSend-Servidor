@@ -44,5 +44,6 @@ app.use('/api/archivos',require('./routes/archivos'));
 
 app.listen(port, '0.0.0.0',()=>{
     console.log(`servidor funcionando en el puerto ${port}`)
+    console.log(FRONTEND_URL)
 })
 
